@@ -1,6 +1,5 @@
 import { SearchInput } from "@/components/SearchInput";
 import VideoList from "@/components/videos/VideoList";
-import { apiKey } from "@/constant";
 import { YouTubeSearchResponse } from "@/types/response";
 
 const VideosPage = async ({
@@ -8,12 +7,13 @@ const VideosPage = async ({
 }: {
   searchParams: { [key: string]: string };
 }) => {
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   const fetchVideos = async (query: string) => {
     const url = new URL(
       `https://www.googleapis.com/youtube/v3/search?q=${query}&key=${apiKey}`
     );
 
-    url.searchParams.set("maxResults", "20");
+    url.searchParams.set("maxResults", "100");
     url.searchParams.set("part", "snippet");
     url.searchParams.set("type", "video");
 
@@ -33,7 +33,7 @@ const VideosPage = async ({
         <SearchInput />
       </div>
       <div>
-        <VideoList videos={videos}/>
+        <VideoList videos={videos} />
       </div>
     </div>
   );

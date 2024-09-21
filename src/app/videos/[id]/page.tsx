@@ -1,4 +1,4 @@
-import { apiKey } from "@/constant";
+
 import { YoutubeVideoResponse } from "@/types/response";
 import type { Metadata } from "next";
 import React from "react";
@@ -18,6 +18,7 @@ export async function generateMetadata(
   }
 }
 
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 const fetchVideo = async (id: string) => {
   const url = new URL(
     `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${apiKey}`
